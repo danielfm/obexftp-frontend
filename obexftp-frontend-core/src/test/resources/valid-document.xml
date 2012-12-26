@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE folder-listing SYSTEM "obex-folder-listing.dtd">
+<!--
+ XML Coder, Jan 21 2005, 18:20:00, (C) 2001 Sony Ericsson Mobile Communications AB 
+-->
+<folder-listing version="1.0"><folder name="Pictures"/>
+<folder name="Sounds"/>
+<folder name="Themes"/>
+<folder name="Videos"/>
+<folder name="Other" size="200" accessed="20070501T235959" created="20070501T235959Z" group="somegroup" group-perm="rwd" modified="20070501T235959Z" other-perm="rw" owner="someguy" user-perm="rwd" />
+</folder-listing>

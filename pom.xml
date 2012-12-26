@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.sourceforge.obexftpfrontend</groupId>
+    <artifactId>obexftp-frontend</artifactId>
+    <packaging>pom</packaging>
+    <version>0.6.6</version>
+    <inceptionYear>2007</inceptionYear>
+    <name>ObexFTP Front-end</name>
+    
+    <description>
+        OBEXFTP Front-End is a simple - but nice - Java Swing application that
+        uses the ObexFTP under the hood to make easier to manipulate the file
+        system of OBEX-enabled devices.
+    </description>
+    
+    <modules>
+        <module>obexftp-frontend-core</module>
+        <module>obexftp-frontend-art</module>
+    </modules>
+    
+    <licenses>
+        <license>
+            <name>Gnu General Public License</name>
+            <url>info/LICENSE.txt</url>
+        </license>
+    </licenses>
+    
+    <url>http://obexftpfrontend.sourceforge.net/</url>
+    
+    <organization>
+        <name>Daniel F. Martins</name>
+        <url>http://danielfmartins.com/</url>
+    </organization>
+    
+    <issueManagement>
+        <url>http://sourceforge.net/tracker/?group_id=201004</url>
+    </issueManagement>
+    
+    <scm>
+        <connection>
+            scm:svn:https://obexftpfrontend.svn.sourceforge.net//svnroot/obexftpfrontend
+        </connection>
+    </scm>
+    
+    <developers>
+        <developer>
+            <id>daniel_martins</id>
+            <name>Daniel F. Martins</name>
+            <roles>
+                <role>Lead developer</role>
+            </roles>
+        </developer>
+    </developers>
+    
+    <contributors>
+        <contributor>
+            <name>Lucas Fais</name>
+            <roles>
+                <role>Tester</role>
+                <role>Suggestions</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Rafael Fiume</name>
+            <roles>
+                <role>Suggestions</role>
+            </roles>
+        </contributor>
+    </contributors>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

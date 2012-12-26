@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.sourceforge.obexftpfrontend</groupId>
+    <artifactId>obexftp-frontend-core</artifactId>
+    <packaging>jar</packaging>
+    <name>ObexFTP Front-end Core</name>
+    <description>This is the core package of the project.</description>
+    <parent>
+        <groupId>net.sourceforge.obexftpfrontend</groupId>
+        <artifactId>obexftp-frontend</artifactId>
+        <version>0.6.6</version>
+    </parent>
+    <dependencies>
+        <!-- sub-projects -->
+        <dependency>
+            <groupId>net.sourceforge.obexftpfrontend</groupId>
+            <artifactId>obexftp-frontend-art</artifactId>
+            <version>0.6.6</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-legacy</artifactId>
+            <version>2.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-junit4</artifactId>
+            <version>2.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- logging -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- other -->
+        <dependency>
+            <groupId>jdom</groupId>
+            <artifactId>jdom</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.4.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+    </dependencies>
+    <profiles>
+        <profile>
+            <id>netbeans-public</id>
+            <activation>
+                <property>
+                    <name>netbeans.execution</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>lib</classpathPrefix>
+                                    <mainClass>net.sourceforge.obexftpfrontend.Main</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>nb</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>directory</goal>
+                                </goals>
+                                <configuration>
+                                    <descriptor>${basedir}/src/main/assemblies/netbeans-run.xml</descriptor>
+                                    <finalName>executable</finalName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

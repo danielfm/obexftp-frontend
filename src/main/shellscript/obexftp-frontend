@@ -1,0 +1,2 @@
+#!/bin/bash
+java %PARAMS% -jar %INSTALL_PATH%obexftp-frontend-core-%VERSION%.jar --lafdecorated

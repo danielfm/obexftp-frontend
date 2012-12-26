@@ -1,0 +1,184 @@
+/**
+ * This is the build script used to generate the Zip packages
+ * that we upload to SourceForge.net website. The generated
+ * files includes a Source package, a Binary package and a DEB package.
+ * @author Daniel F. Martins
+ */
+import java.text.*
+
+Ant.property(file: 'build.properties')
+def antProperties = Ant.project.properties
+
+
+app = getArtifactName()
+version = getPomVersion()
+
+
+/* helper methods */
+
+/**
+ * Get the version information specified in the POM file.
+ * @return version.
+ */
+def getPomVersion() {
+  def doc = new XmlParser(false,false).parse(new File('pom.xml'))
+  doc.version[0].text()
+}
+
+/**
+ * Get the artifact name specified in the POM file.
+ * @return artifact name.
+ */
+def getArtifactName() {
+  def doc = new XmlParser(false,false).parse(new File('pom.xml'))
+  doc.artifactId[0].text()
+}
+
+/**
+ * Calculates the size of all files inside the DEB package, in kilobytes.
+ * @param deb_folder Folder.
+ * @return Size, in kilobytes.
+ */
+int getDebSize(deb_folder) {
+  long size = 0
+  new File(deb_folder).eachFileRecurse {
+    size += it.size()
+  }
+  size / 1024
+}
+
+/**
+ * Replace the placeholders (ex %DATE%) on all files of a given path
+ * @param path Path which files should be analysed.
+ * @param properties antProperties object.
+ * @param appendInstallPath Whether the %INSTALL_PATH% placeholder should
+ * be replaced by a non-empty string. Defaults to true.
+ */
+void replaceTokens(path, properties, appendInstallPath = true) {
+  def prefix = appendInstallPath ? properties.install_path : ''
+  Ant.replace(dir:path, token:'%INSTALL_PATH%', value:prefix) {
+    include(name:'**/*')
+  }
+
+  def params = properties.default_laf
+  Ant.replace(dir:path, token:'%PARAMS%', value:params) {
+    include(name:'**/*')
+  }
+
+  Ant.replace(dir:path, token:'%VERSION%', value:version) {
+    include(name:'**/*')
+  }
+
+  def dateFormat = DateFormat.getDateInstance(DateFormat.FULL)
+  def today = dateFormat.format(new Date())
+  Ant.replace(dir:path, token:'%DATE%', value:today) {
+    include(name:'**/*')
+  }
+
+  Ant.replace(dir:path, token:'%SIZE%', value:getDebSize(path)) {
+    include(name:'**/*')
+  }
+}
+
+/* Gant targets */
+
+target('default' : 'Generate all artifacts (bin, deb and source packages)') {
+  source()
+  bin()
+  deb()
+}
+
+target(prepareFolder : 'Prepare the release output folder') {
+  Ant.mkdir(dir:antProperties.out)
+}
+
+target(source : 'Generate the source package') {
+  depends(prepareFolder)
+
+  def folder_name = "$app-$version-src"
+  def path = "${antProperties.out}/$folder_name"
+  def zip = "${path}.zip"
+
+  Ant.echo 'Generating the source package'
+  Ant.mkdir(dir:path)
+  Ant.copy(toDir:path, includeEmptyDirs:false) {
+    fileset(dir:'.', excludes:'**/target/** **/.** **/log/**')
+  }
+
+  Ant.zip(destfile:"${path}.zip") {
+    zipfileset(dir:path, prefix:folder_name)
+  }
+  Ant.delete(dir:path)
+}
+
+target(bin : 'Generate the binary package') {
+  depends(prepareFolder)
+
+  def folder_name = "$app-$version-bin"
+  def path = "${antProperties.out}/$folder_name"
+  def zip = "${path}.zip"
+
+  Ant.echo 'Generating the binary package'
+  Ant.mkdir(dir:path)
+  Ant.copy(toDir:path) {
+    fileset(dir:antProperties.exe_path)
+    fileset(dir:'info', excludes:'**/*SOURCES*.txt')
+    fileset(dir:'src/main/shellscript')
+  }
+
+  replaceTokens(path, antProperties, false)
+  Ant.chmod(dir:path, type:'file', includes:'**/obexftp-frontend', perm:'ugo+rx')
+
+  Ant.zip(destFile:"${path}.zip") {
+    zipfileset(dir:path, prefix:folder_name)
+  }
+
+  Ant.delete(dir:path)
+}
+
+target (deb : 'Generate .deb package') {
+  depends(prepareFolder)
+
+  def deb_folder = "${antProperties.out}/$app-$version-deb"
+  def deb_file = "${antProperties.out}/${app}-${version}.deb"
+
+  def deb_ctl = "${deb_folder}${antProperties.deb_control}"
+  def deb_bin = "${deb_folder}${antProperties.deb_bin}"
+  def deb_lib = "${deb_folder}${antProperties.deb_lib}${app}"
+  def deb_img = "${deb_folder}${antProperties.deb_pixmaps}${app}"
+
+  Ant.echo 'Generating .deb package'
+  Ant.mkdir(dir:deb_folder)
+
+  Ant.mkdir(dir:deb_ctl)
+  Ant.mkdir(dir:deb_bin)
+  Ant.mkdir(dir:deb_lib)
+  Ant.mkdir(dir:deb_img)
+
+  Ant.copy(file:'src/main/deb/control', todir:deb_ctl)
+
+  Ant.copy(toDir:deb_lib) {
+    fileset(dir:antProperties.exe_path)
+  }
+
+  Ant.copy(toDir:"${deb_folder}${antProperties.deb_appshare}") {
+    fileset(dir:'src/main/shortcut/gnome')
+  }
+
+  Ant.copy(file:'obexftp-frontend-art/src/main/resources/image/main.png', tofile:"${deb_img}/${app}.png")
+
+  Ant.copy(toDir:deb_bin) {
+    fileset(dir:'src/main/shellscript', includes:'obexftp-frontend')
+  }
+
+  replaceTokens(deb_folder, antProperties)
+  Ant.chmod(dir:deb_bin, type:'file', includes:'**/obexftp-frontend', perm:'ugo+rx')
+
+  Ant.exec(executable:'dpkg') {
+    arg(value:'--build')
+    arg(value:deb_folder)
+    arg(value:deb_file)
+  }
+
+  Ant.delete(dir:deb_folder)
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>net.sourceforge.obexftpfrontend</groupId>
+    <artifactId>obexftp-frontend-art</artifactId>
+    <packaging>jar</packaging>
+    <name>ObexFTP Front-end Art</name>
+    <description>This package contains the icons and images used by the core package.</description>
+    
+    <parent>
+        <groupId>net.sourceforge.obexftpfrontend</groupId>
+        <artifactId>obexftp-frontend</artifactId>
+        <version>0.6.6</version>
+    </parent>
+</project>

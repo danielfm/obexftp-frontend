@@ -1,0 +1,8 @@
+<?xml version=" 1.0"?> <!-- listing by a Nokia 6681 device -->
+<!DOCTYPE folder-listing SYSTEM "obex-folder-listing.dtd"
+  [ <!ATTLIST folder mem-type CDATA #IMPLIED> <!-- not OBEX-compliant elements here -->
+  <!ATTLIST folder label CDATA #IMPLIED> ]>
+<folder-listing version=" 1.0"> <!-- check the leading spaces in 'version' elements -->
+   <folder name="C:" user-perm="RW" mem-type="DEV" label="Phone memory"/>
+   <folder name="E:" user-perm="RW" mem-type="MMC" label="Some card here"/> 
+</folder-listing>

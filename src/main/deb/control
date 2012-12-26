@@ -1,0 +1,14 @@
+Package: obexftp-frontend
+Version: %VERSION%
+Section: Utilities
+Priority: optional
+Architecture: all
+Essential: no
+Depends: obexftp, sun-java6-jre
+Installed-Size: %SIZE%
+Maintainer: Daniel F. Martins <daniel_martins@users.sourceforge.net>
+Description: OBEXFTP Front-end
+ OBEXFTP Front-end is a simple Java Swing application that uses the ObexFTP
+ under the hood to make easier to manipulate the file system of
+ OBEX-enabled devices.
+ .
