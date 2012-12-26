@@ -1,0 +1,87 @@
+Running OBEXFTP front-end from the Sources
+******************************************
+
+See below how to build and run ObexFTP front-end from sources. This source
+package is recommended to those who want to see how the application is
+implemented and packaged. It requires a lot of dependencies, but the procedures
+needed to package and run the application are quite simple.
+
+
+
+
+
+CONTENT OF THIS FILE
+--------------------
+
+1. Get the code
+2. Requirements
+3. Install required libraries
+4. Open the project in NetBeans 6
+5. Run the tests
+6. Run the application
+
+
+
+
+
+1. Get the code
+---------------
+
+Please visit the link below to get instructions about how to checkout
+code from our SVN server:
+
+http://sourceforge.net/svn/?group_id=201004
+
+You can also get the Source zip file in the download page at the project's website:
+
+http://sourceforge.net/project/showfiles.php?group_id=201004
+
+
+2. Requirements
+---------------
+
+In order to compile and run this application, you will need to install and
+configure the following tools:
+
++ Maven 2    - http://maven.apache.org;
++ NetBeans 6 - http://www.netbeans.org;
++ Maven IDE  - Use the NetBeans' plugin manager (in Tools menu).
+
+
+3. Install required libraries
+-----------------------------
+
+Go to the 'lib' dir and read the 'README.txt' file to know how to install
+the required libraries.
+
+
+4. Open the project in NetBeans 6
+---------------------------------
+
+Now, you have to open the project in NetBeans. So, open NetBeans and
+go to File - Open Project. Then, select the main folder and press 'Open Project'
+button.
+
+
+5. Run the tests
+----------------
+
+To verify if the application is working, you might want to run the test code. To
+do that, just right-click in the project and select the 'Test' item.
+
+
+6. Run the application
+----------------------
+
+First, you need to generate the binary package of the application. To do this,
+right-click in the project and select 'Clean and Build' item. This makes Maven
+test the application and generate the binary package. This package will be
+available at the following folder:
+
+obexftp-frontend-core/target/executable-netbeans.dir
+
+To execute the application, just right-click the "ObexFTP front-end Core"
+project and then click "Run".
+
+
+--EOF

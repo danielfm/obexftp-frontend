@@ -1,0 +1,149 @@
+OBEXFTP front-end CHANGELOG
+***************************
+
+Version 0.6.6
+-------------
+
+Fixed bugs:
+
+  + [2019085] Swing listener messes up the connection line after the application start-up.
+  + [2019087] "Reload folder" action should remove information about folders's child nodes.
+
+Improvements:
+
+  + [2019090] Improvements on shortcut keys.
+  + [2019091] New field "Last update" added to the Device Info dialog.
+  + [2019093] High-resolution logo PNG, 128x128.
+
+
+Version 0.6.5
+-------------
+
+Fixed bugs:
+
+  + [1955773] Strange issue in tree rendering.
+  + [1955783] Non-existent devinfo file raises a connection error.
+
+Improvements:
+
+  + [1955778] New look and feel.
+  + [1955779] Tips on how to fill the "Connection line" field.
+
+
+Version 0.6.4
+-------------
+
+Fixed bugs:
+
+  + [1813260] A failing command should run immediately when the user wants.
+  + [1872444] Cannot handle files that have special characters in the name.
+
+Improvements:
+
+  + [1804410] Show basic device info at connection test.
+  + [1804412] Create a "device info dialog".
+  + [1804416] Add more advanced ObexFTP options.
+  + [1850136] preserve modification time when downloading files.
+
+
+Version 0.6.3
+-------------
+
+Fixed bugs:
+
+ + [1777608] "Get files" command description wrong.
+ + [1777611] Lack of shortcut keys in the file properties dialog.
+ + [1799070] Exception should be thrown when the obexftp exit value != 0.
+ + [1799073] Get rid of deprecated API usage.
+ + [1801260] File extension matching must be case-insensitive.
+
+Improvements:
+
+ + [1799383] Add drag-and-drop cappabilities to the application*.
+ + [1800019] Re-design the file type configuration.
+ + [1800587] deb package.
+ + [1800729] XStream introduced to deal with the config persistence.
+ + [1800737] Change the "Value" field to something more meaningful.
+
+* Only the "drop" operation added; drag still missing
+
+
+Version 0.6.2
+-------------
+
+Fixed bugs:
+
++ [1773565] The app should accept send files w/o select a parent folder.
++ [1777088] The app shows the wrong files when expanding a node.
+
+Improvements:
+
++ [1774446] Convert the projects into Maven projects.
++ [1774446] The project now uses the SourceForge's SVN server.
++ [1774447] Separate the help files into a new project (or package).
++ [1774449] Add the "Documents" file extensions in the config dialog.
++ [1777079] Change "TTY" transport type to "Serial".
++ [1777080] Rename the field "Transport" to "Connection type".
++ [1777083] Bundles a default config file in the binary packages.
+
+
+Version 0.6.1
+-------------
+
+Fixed bugs:
+
++ [1764057] Not working on Nokia 6881.
+
+Improvements:
+
++ [1760744] Improve help information.
++ [1767213] Show quit confirmation message only if needed.
++ [1773117] Create a Java Web Start distribution.
++ [1773120] Change the logo image and add an icon to the app.
+
+
+Version 0.5.4
+-------------
+
+Fixed bugs:
+
++ [1760498] The application should save log information into a file.
+
+Improvements:
+
++ [1760740] Make the validation checking of obex listing configurable.
++ [1759791] Pop up the config dialog when there's no config.xml file.
+
+
+Version 0.5.3
+-------------
+
+Fixed bugs:
+
++ [1758583] "Default button" stuff stop working after used for the first time.
++ [1758586] Commands executed in reverse order.
++ [1758587] Show root files action don't clear the file system tree before render the
+  file system tree.
+
+Improvements:
+
++ [1758588] Application's look and feel replaced.
++ [1758616] Better log messages, which helps us to find bugs more effectively.
++ [1758615] Command module was re-written from scratch.
++ [1758590] "Working" animation now shows the description of the command being executed.
+
+
+Version 0.5.2
+-------------
+
+Fixed bugs:
+
++ [1758582] ClassCastException in ConfigurationDialog.
+
+
+Version 0.5.1
+-------------
+
++ First public release.
+
+--EOF
